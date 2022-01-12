@@ -1,11 +1,16 @@
 from django.shortcuts import render, HttpResponse
+from .models import Task
+from django.http import JsonResponse
+
 
 # Create your views here.
 
 def seeAllTasks(request):
     
-    # GET
-    return HttpResponse('All tasks')
+    allTasks = Task.objects.all().values()
+
+    allTasks_list = list(allTasks)  # important: convert the QuerySet to a list object
+    return JsonResponse(allTasks_list, safe=False)
 
 def addTasks(request):
     
