@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import Task
+from .forms import taskForm
 from django.http import JsonResponse
 
 # Create your views here.
@@ -32,8 +33,8 @@ def getSingleTask(request, id):
 
 def updateTask(request, id):
 
-
-    #Get
+    
+    #POST
     return HttpResponse("Update task")
 
 def deleteTask(request, id):
