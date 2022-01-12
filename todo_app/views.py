@@ -8,6 +8,7 @@ def seeAllTasks(request):
     
     allTasks = Task.objects.all().values() 
     allTasks_list = list(allTasks)  # important: convert the QuerySet to a list object
+    print(allTasks_list)
     
     return JsonResponse(allTasks_list, safe=False)
 
@@ -21,10 +22,11 @@ def addTasks(request):
 
 def getSingleTask(request, id):
 
-    getTasks = Task.objects.get(id = id) 
+    getTasks = Task.objects.all().values()
     getTasks_list = list(getTasks)  # important: convert the QuerySet to a list object
+    print(getTasks_list)
     
-    return JsonResponse(getTasks_list, safe=False)
+    return JsonResponse(getTasks_list[id-1], safe=False)
     #Get
     # return HttpResponse("get single task")
 
