@@ -1,4 +1,4 @@
-# TODO List App (Django) eith Sentry Integration
+# TODO List App (Django) with Sentry Integration
 
 ##  Run Locally
 * `pip install django`
