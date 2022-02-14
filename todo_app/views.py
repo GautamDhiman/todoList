@@ -1,13 +1,21 @@
+from ast import Try
 from django.shortcuts import render, HttpResponse
 from .models import Task
 from .forms import taskForm
 from django.http import JsonResponse
+from sentry_sdk import capture_exception, capture_message
 
 # Create your views here.
 
 def seeAllTasks(request):
-    
-    allTasks = Task.objects.all().values() 
+
+    try:
+        allTasks = Task.objects.all().values()
+    except Exception as e:
+        # Alternatively the argument can be omitted
+        capture_message('Something went wrong')
+        capture_exception(e)
+     
     allTasks_list = list(allTasks)  # important: convert the QuerySet to a list object
     print(allTasks_list)
     
@@ -23,7 +31,13 @@ def addTasks(request):
 
 def getSingleTask(request, id):
 
-    getTasks = Task.objects.all().values()
+    try:
+        getTasks = Task.objects.all().values()
+    except Exception as e:
+        # Alternatively the argument can be omitted
+        capture_message('Something went wrong')
+        capture_exception(e)
+    
     getTasks_list = list(getTasks)  # important: convert the QuerySet to a list object
     print(getTasks_list)
     
